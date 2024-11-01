@@ -1,0 +1,9 @@
+ipykernel
+fastapi[standard]
+pillow
+torch
+transformers
+ipywidgets
+langchain
+langchain-community
+langchain-ollama
