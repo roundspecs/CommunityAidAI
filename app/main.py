@@ -15,22 +15,30 @@ caption_service = CaptionService()
 solution_service = SolutionService()
 steps_service = StepsService()
 
+
 @app.post("/caption")
 async def get_caption(file: UploadFile = File(...)):
-    # save the file temporarily
     with open("temp.jpg", "wb") as buffer:
         buffer.write(file.file.read())
-    # generate caption
     caption = caption_service.generate_caption("temp.jpg")
-    # remove the temporary file
     os.remove("temp.jpg")
 
     return {"caption": caption}
 
+
 @app.get("/solutions")
 async def get_solution(caption: Optional[str], description: str):
-    return {"solutions": solution_service.generate_solution(caption, description)}
+    return {
+        "solutions": solution_service.generate_solution(caption, description),
+    }
+
 
 @app.get("/steps")
 async def get_steps(caption: str, description: str, solution: str):
-    return {"steps": steps_service.generate_solution(caption, description, solution)}
+    return {
+        "steps": steps_service.generate_solution(
+            caption,
+            description,
+            solution,
+        ),
+    }

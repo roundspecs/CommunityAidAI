@@ -3,7 +3,6 @@ from typing import List
 from langchain.prompts import ChatPromptTemplate
 from langchain.schema.output_parser import StrOutputParser
 from langchain_ollama import ChatOllama
-
 from utils.numbered_list_output_parser import NumberedListOutputParser
 
 
@@ -53,10 +52,15 @@ Ensure that each step starts with the step number followed by a period and a spa
                 ),
             ]
         )
-        self.chain = prompt_template | model | StrOutputParser() | NumberedListOutputParser()
+        self.chain = (
+            prompt_template | model | StrOutputParser() | NumberedListOutputParser()
+        )
 
     def generate_solution(
-        self, caption: str, description: str, solution: str
+        self,
+        caption: str,
+        description: str,
+        solution: str,
     ) -> List[str]:
         return self.chain.invoke(
             {
