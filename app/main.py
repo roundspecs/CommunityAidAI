@@ -3,7 +3,7 @@ from typing import Optional
 
 from fastapi import FastAPI, File, UploadFile
 
-from app.services import CaptionService, SolutionService
+from app.services import CaptionService, SolutionService, StepsService
 
 app = FastAPI(
     title="CommunityAidAI",
@@ -13,6 +13,7 @@ app = FastAPI(
 
 caption_service = CaptionService()
 solution_service = SolutionService()
+steps_service = StepsService()
 
 @app.post("/caption")
 async def get_caption(file: UploadFile = File(...)):
@@ -26,6 +27,10 @@ async def get_caption(file: UploadFile = File(...)):
 
     return {"caption": caption}
 
-@app.get("/solution")
+@app.get("/solutions")
 async def get_solution(caption: Optional[str], description: str):
     return {"solutions": solution_service.generate_solution(caption, description)}
+
+@app.get("/steps")
+async def get_steps(caption: str, description: str, solution: str):
+    return {"steps": steps_service.generate_solution(caption, description, solution)}
