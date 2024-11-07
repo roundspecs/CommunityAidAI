@@ -27,14 +27,17 @@ async def get_caption(file: UploadFile = File(...)):
 
 
 @app.get("/solutions")
-async def get_solution(caption: Optional[str], description: str):
+async def get_solution(
+    description: str,
+    caption: Optional[str] = None,
+):
     return {
         "solutions": solution_service.generate_solution(caption, description),
     }
 
 
 @app.get("/steps")
-async def get_steps(caption: str, description: str, solution: str):
+async def get_steps(description: str, solution: str, caption: Optional[str] = None):
     return {
         "steps": steps_service.generate_solution(
             caption,

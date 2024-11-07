@@ -1,13 +1,10 @@
-import json
 from typing import List
 
 from langchain.prompts import ChatPromptTemplate
-from langchain.schema import AIMessage, HumanMessage, SystemMessage
 from langchain.schema.output_parser import StrOutputParser
-from langchain.schema.runnable import RunnableLambda
 from langchain_ollama import ChatOllama
 
-from utils import NumberedListOutputParser
+from .numbered_list_output_parser import NumberedListOutputParser
 
 
 class SolutionService:

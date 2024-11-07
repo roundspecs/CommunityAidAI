@@ -3,7 +3,7 @@ from typing import List
 from langchain.prompts import ChatPromptTemplate
 from langchain.schema.output_parser import StrOutputParser
 from langchain_ollama import ChatOllama
-from utils.numbered_list_output_parser import NumberedListOutputParser
+from app.services.numbered_list_output_parser import NumberedListOutputParser
 
 
 class StepsService:
